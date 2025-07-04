@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Нове свідоцтво{% endblock %}
+{% block content %}
+  <div class="card">
+    <h2>Новий сертифікат</h2>
+    <form method="post" class="grid gap-3">
+      <input name="full_name"   placeholder="ПІБ" required>
+      <input name="course"      placeholder="Назва курсу" required>
+      <input name="hours"       type="number" min="1" placeholder="Кількість годин" required>
+      <label>Початок: <input name="start_date" type="date" required></label>
+      <label>Кінець:  <input name="end_date"   type="date" required></label>
+      <input name="lecturer"    placeholder="Керівник курсу" required>
+      <input name="assistant"   placeholder="Асистент" required>
+      <button>Згенерувати PDF</button>
+    </form>
+  </div>
+{% endblock %}

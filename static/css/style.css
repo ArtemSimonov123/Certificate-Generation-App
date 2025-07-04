@@ -1,0 +1,80 @@
+/* Tailwind тут не потрібен — мінімальний, ванільний CSS */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --primary: #0066ff;
+  --primary-dark: #0044aa;
+  --bg: #f4f6fa;
+  --text: #1f2937;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+nav {
+  background: var(--primary);
+  color: #fff;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+h1, h2 { margin: 0 0 1rem; font-weight: 600; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.4rem; }
+
+input, button {
+  width: 100%;
+  padding: .75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0,102,255,.2);
+}
+
+button {
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s;
+  border: none;
+  margin-top: .5rem;
+}
+button:hover { background: var(--primary-dark); }
+
+footer {
+  text-align: center;
+  font-size: .9rem;
+  padding: 1rem;
+  color: #6b7280;
+}
