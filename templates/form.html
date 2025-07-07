@@ -4,20 +4,20 @@
 {% block content %}
 <div class="layout">
 
-  <div class="card" style="min-width:320px">
-    <h2 style="text-align:center">Новий сертифікат</h2>
+  <div class="card">
+    <h2>Новий сертифікат</h2>
 
-    <form method="post" class="grid gap-3">
-      <input name="full_name"  placeholder="ПІБ"               required>
-      <input name="specialty"  placeholder="Спеціальність"     required>
-      <input name="course"     placeholder="Назва курсу"       required>
+    <form method="post">
+      <input name="full_name"  placeholder="ПІБ" required>
+      <input name="specialty"  placeholder="Спеціальність" required>
+      <input name="course"     placeholder="Назва курсу" required>
       <input name="hours"      type="number" min="1" placeholder="Кількість годин" required>
 
       <label>Початок:
         <input name="start_date" type="date" required>
       </label>
       <label>Кінець:
-        <input name="end_date"   type="date" required>
+        <input name="end_date" type="date" required>
       </label>
 
       <label>Курс:
@@ -28,16 +28,13 @@
         </select>
       </label>
 
-      <input name="lecturer"   placeholder="Викладач курсу"    required>
+      <input name="lecturer" placeholder="Викладач курсу" required>
 
       <button>Згенерувати PDF</button>
     </form>
   </div>
 
-<div style="display:flex; align-items:flex-start; justify-content:center; padding-top:14px">
-  <a href="{{ url_for('certificates') }}" class="big-link">
-    Мої&nbsp;сертифікати&nbsp;
-  </a>
-</div>
+  <a href="{{ url_for('certificates') }}" class="big-link">Мої&nbsp;сертифікати</a>
 
+</div>
 {% endblock %}
