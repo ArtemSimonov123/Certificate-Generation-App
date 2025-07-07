@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Мої сертифікати{% endblock %}
+
+{% block content %}
+<div class="layout">
+
+  <!-- ліва колонка: список PDF -->
+  <div class="card" style="min-width:320px; width:100%; max-width:640px">
+    <h2 style="text-align:center">Видані сертифікати</h2>
+
+    {% if files %}
+      <ul style="list-style:none; padding:0; margin:0">
+        {% for f in files %}
+        <li class="cert-item">
+          <span class="cert-name">{{ f }}</span>
+          <a href="{{ url_for('download', filename=f) }}">
+            <button style="width:auto">Завантажити</button>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Поки що немає жодного згенерованого сертифіката.</p>
+    {% endif %}
+  </div>
+
+  <!-- права колонка: кнопка "Новий сертифікат" -->
+<div style="display:flex;align-items:center;justify-content:center">
+  <a href="{{ url_for('index') }}" class="big-link">
+    &nbsp;Новий&nbsp;сертифікат
+  </a>
+</div>
+
+</div>
+{% endblock %}
