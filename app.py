@@ -1,6 +1,7 @@
 from flask import (
     Flask, render_template, request,
-    send_from_directory, url_for, redirect
+    send_from_directory, url_for, redirect,
+    session
 )
 from fpdf import FPDF
 import qrcode, uuid, os
@@ -14,6 +15,7 @@ GEN_DIR    = BASE_DIR / "generated"
 QR_DIR     = STATIC_DIR / "qr"
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY", "dev-key")
 GEN_DIR.mkdir(exist_ok=True)
 QR_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -97,17 +99,20 @@ def index():
         }
         fname = f"{data['full_name'].replace(' ', '_')}_{datetime.now().date()}.pdf"
         pdf_path = build_certificate(data, fname)
+
+        certs = session.get("cert_files", [])
+        certs.append(pdf_path.name)
+        session["cert_files"] = certs
+        session.modified = True
+
         return send_from_directory(GEN_DIR, pdf_path.name, as_attachment=True)
     return render_template("form.html")
 
+
 @app.route("/certificates")
 def certificates():
-    files = sorted(
-        GEN_DIR.glob("*.pdf"),
-        key=lambda p: p.stat().st_mtime,
-        reverse=True
-    )
-    return render_template("certificates.html", files=[f.name for f in files])
+    files = session.get("cert_files", [])
+    return render_template("certificates.html", files=files)
 
 @app.route("/download/<path:filename>")
 def download(filename):
