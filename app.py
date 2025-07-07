@@ -31,8 +31,8 @@ def build_certificate(data: dict, filename: str) -> Path:
     pdf.set_auto_page_break(auto=False)
 
     pdf.set_font("Main", "", 14)
-    pdf.set_xy(0, 46)
-    pdf.cell(210, 7, f"Спеціальність: {data['specialty']}", align="C")
+    pdf.set_xy(1, 41.5)
+    pdf.multi_cell(210, 7, f"Спеціальність: {data['specialty']}", align="C")
 
     pdf.set_font("Arsenal", "", 32)
     pdf.set_xy(0, 92)
@@ -115,4 +115,6 @@ def download(filename):
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
+    app.jinja_env.auto_reload = True
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.run(debug=True, host="0.0.0.0", port=port)
