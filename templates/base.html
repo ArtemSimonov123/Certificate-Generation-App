@@ -7,12 +7,15 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-  <nav>Генератор сертифікатів</nav>
+  <!-- простий не‑клікабельний напис -->
+  <nav style="text-align:center">
+    Генератор сертифікатів
+  </nav>
 
   <main>
     {% block content %}{% endblock %}
   </main>
 
-  <footer>&copy; {{ 2025 }} MyCompany • Версія 1.0</footer>
+  <footer>&copy; 2025 MyCompany • Версія 1.0</footer>
 </body>
 </html>
