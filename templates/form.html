@@ -1,32 +1,43 @@
 {% extends 'base.html' %}
-{% block title %}Нове свідоцтво{% endblock %}
+{% block title %}Новий сертифікат{% endblock %}
+
 {% block content %}
-<div class="card">
-  <h2>Новий сертифікат</h2>
-  <form method="post" class="grid gap-3">
-    <input name="full_name"  placeholder="ПІБ"               required>
-    <input name="specialty"  placeholder="Спеціальність"     required>
-    <input name="course"     placeholder="Назва курсу"       required>
-    <input name="hours"      type="number" min="1" placeholder="Кількість годин" required>
+<div class="layout">
 
-    <label>Початок:
-      <input name="start_date" type="date" required>
-    </label>
-    <label>Кінець:
-      <input name="end_date"   type="date" required>
-    </label>
+  <div class="card" style="min-width:320px">
+    <h2 style="text-align:center">Новий сертифікат</h2>
 
-    <label>Курс:
-      <select name="year" required>
-        {% for n in range(1,7) %}
-        <option value="{{ n }}">{{ n }}</option>
-        {% endfor %}
-      </select>
-    </label>
+    <form method="post" class="grid gap-3">
+      <input name="full_name"  placeholder="ПІБ"               required>
+      <input name="specialty"  placeholder="Спеціальність"     required>
+      <input name="course"     placeholder="Назва курсу"       required>
+      <input name="hours"      type="number" min="1" placeholder="Кількість годин" required>
 
-    <input name="lecturer"   placeholder="Викладач курсу"    required>
+      <label>Початок:
+        <input name="start_date" type="date" required>
+      </label>
+      <label>Кінець:
+        <input name="end_date"   type="date" required>
+      </label>
 
-    <button>Згенерувати PDF</button>
-  </form>
+      <label>Курс:
+        <select name="year" required>
+          {% for n in range(1,7) %}
+          <option value="{{ n }}">{{ n }}</option>
+          {% endfor %}
+        </select>
+      </label>
+
+      <input name="lecturer"   placeholder="Викладач курсу"    required>
+
+      <button>Згенерувати PDF</button>
+    </form>
+  </div>
+
+<div style="display:flex; align-items:flex-start; justify-content:center; padding-top:14px">
+  <a href="{{ url_for('certificates') }}" class="big-link">
+    Мої&nbsp;сертифікати&nbsp;
+  </a>
 </div>
+
 {% endblock %}

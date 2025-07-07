@@ -87,3 +87,42 @@ select {
   background: #fff;
 }
 
+.layout{
+  display:flex;
+  justify-content:center;  
+  gap:3rem;
+  flex-wrap:wrap;          
+}
+
+.layout>*{
+  flex:0 0 auto;
+}
+
+.big-link {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  padding: 1.2rem 2.4rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  transition: background .2s;
+}
+.big-link:hover { background: var(--primary-dark); }
+
+.cert-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .75rem 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+.cert-name {
+  flex: 1;
+  overflow-wrap: anywhere;   
+}
+
