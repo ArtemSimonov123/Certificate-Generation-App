@@ -4,7 +4,6 @@
 {% block content %}
 <div class="layout">
 
-  <!-- ліва колонка: список PDF -->
   <div class="card" style="min-width:320px; width:100%; max-width:640px">
     <h2 style="text-align:center">Видані сертифікати</h2>
 
@@ -24,8 +23,7 @@
     {% endif %}
   </div>
 
-  <!-- права колонка: кнопка "Новий сертифікат" -->
-<div style="display:flex;align-items:center;justify-content:center">
+  <div style="display:flex;align-items:center;justify-content:center">
   <a href="{{ url_for('index') }}" class="big-link">
     &nbsp;Новий&nbsp;сертифікат
   </a>

@@ -87,20 +87,17 @@ select {
   background: #fff;
 }
 
-/* ——— нова горизонтальна розкладка головної сторінки ——— */
 .layout{
   display:flex;
-  justify-content:center;    /* центрує всю групу по горизонталі */
+  justify-content:center;  
   gap:3rem;
-  flex-wrap:wrap;            /* на мобайлі переходить у колонку */
+  flex-wrap:wrap;          
 }
 
-/* робимо обидві колонки «не‑розтяжними» */
 .layout>*{
   flex:0 0 auto;
 }
 
-/* велика синя кнопка праворуч */
 .big-link {
   display: inline-block;
   background: var(--primary);
@@ -116,7 +113,6 @@ select {
 }
 .big-link:hover { background: var(--primary-dark); }
 
-/* ——— список сертифікатів ——— */
 .cert-item {
   display: flex;
   align-items: center;
@@ -127,6 +123,6 @@ select {
 }
 .cert-name {
   flex: 1;
-  overflow-wrap: anywhere;   /* ламає довгі назви, щоб не розтягували рядок */
+  overflow-wrap: anywhere;   
 }
 

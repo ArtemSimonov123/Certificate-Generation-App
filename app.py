@@ -17,13 +17,11 @@ app = Flask(__name__)
 GEN_DIR.mkdir(exist_ok=True)
 QR_DIR.mkdir(parents=True, exist_ok=True)
 
-# ────────────── PDF з фоном ──────────────
 class CertificatePDF(FPDF):
     def header(self):
         self.image(str(STATIC_DIR / "img" / "template.png"), x=0, y=0, w=210)
     def footer(self): pass
 
-# ────────────── генератор PDF ─────────────
 def build_certificate(data: dict, filename: str) -> Path:
     pdf = CertificatePDF(orientation="P", unit="mm", format="A4")
     pdf.add_page()
@@ -32,24 +30,20 @@ def build_certificate(data: dict, filename: str) -> Path:
     pdf.add_font("Arsenal", "", str(FONTS_DIR / "Arsenal-Regular.ttf"), uni=True)
     pdf.set_auto_page_break(auto=False)
 
-    # Спеціальність
     pdf.set_font("Main", "", 14)
     pdf.set_xy(0, 46)
     pdf.cell(210, 7, f"Спеціальність: {data['specialty']}", align="C")
 
-    # ПІБ
     pdf.set_font("Arsenal", "", 32)
     pdf.set_xy(0, 92)
     pdf.cell(210, 12, data["full_name"], align="C")
 
-    # Назва курсу
     pdf.set_font("Main", "", 16)
     pdf.set_xy(0, 114)
     pdf.multi_cell(210, 9,
         f'за успішне закінчення курсу «{data["course"]}»',
         align="C")
 
-    # Тривалість, дати, курс (вирівняно й по центру)
     pdf.set_font("Main", "", 16)
     lines = [
         f'Тривалість: {data["hours"]} годин',
@@ -63,14 +57,12 @@ def build_certificate(data: dict, filename: str) -> Path:
         pdf.text((210 - w) / 2, y, txt)
         y += 8
 
-    # Підписи
     pdf.set_font("Main", "", 16)
     pdf.set_xy(115, 214)
     pdf.cell(60, 6, data["lecturer"], align="C")
     pdf.set_xy(115, 234)
     pdf.cell(60, 6, "Ткачук В.А.", align="C")
 
-    # QR‑код
     qr_text = (
         f"ПІБ: {data['full_name']}\n"
         f"Спеціальність: {data['specialty']}\n"
@@ -90,7 +82,6 @@ def build_certificate(data: dict, filename: str) -> Path:
     pdf.output(str(out_path))
     return out_path
 
-# ────────────── маршрути ──────────────
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
@@ -109,10 +100,8 @@ def index():
         return send_from_directory(GEN_DIR, pdf_path.name, as_attachment=True)
     return render_template("form.html")
 
-# список уже згенерованих PDF
 @app.route("/certificates")
 def certificates():
-    # беремо всі .pdf, сортуємо за датою зміни (новіші перші)
     files = sorted(
         GEN_DIR.glob("*.pdf"),
         key=lambda p: p.stat().st_mtime,
@@ -120,12 +109,10 @@ def certificates():
     )
     return render_template("certificates.html", files=[f.name for f in files])
 
-# окремий ендпойнт для скачування
 @app.route("/download/<path:filename>")
 def download(filename):
     return send_from_directory(GEN_DIR, filename, as_attachment=True)
 
-# ───────────────────────────────────────
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     app.run(debug=True, host="0.0.0.0", port=port)
